@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Noble Hadith</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:SolaimanLipi, Arial, sans-serif;
+background:#f4f7f9;
+padding:20px;
+color:#222;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+}
+
+.header{
+text-align:center;
+margin-bottom:20px;
+}
+
+.logo{
+font-size:32px;
+font-weight:bold;
+color:#0f766e;
+}
+
+.subtitle{
+color:#666;
+margin-top:5px;
+}
+
+.card{
+background:#fff;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.date{
+color:#0f766e;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.title{
+font-size:28px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.content{
+font-size:20px;
+line-height:1.9;
+text-align:justify;
+}
+
+.source{
+margin-top:25px;
+padding-top:15px;
+border-top:1px solid #ddd;
+font-weight:bold;
+color:#555;
+}
+
+.footer{
+text-align:center;
+margin-top:25px;
+color:#777;
+font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<div class="logo">Noble Hadith</div>
+<div class="subtitle">দৈনিক ইসলামিক বার্তা</div>
+</div>
+
+<div class="card">
+<div class="date" id="date">লোড হচ্ছে...</div>
+<div class="title" id="title">লোড হচ্ছে...</div>
+<div class="content" id="content">লোড হচ্ছে...</div>
+<div class="source" id="source">লোড হচ্ছে...</div>
+</div>
+
+<div class="footer">
+© Noble Hadith
+</div>
+
+</div>
+
+<script>
+fetch("posts.json")
+.then(response => response.json())
+.then(posts => {
+
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth()+1).padStart(2,'0');
+const dd = String(today.getDate()).padStart(2,'0');
+
+const currentDate = `${yyyy}-${mm}-${dd}`;
+
+const post = posts.find(item => item.date === currentDate);
+
+if(post){
+document.getElementById("date").innerText = "তারিখ: " + post.date;
+document.getElementById("title").innerText = post.title;
+document.getElementById("content").innerText = post.content;
+document.getElementById("source").innerText = "উৎস: " + post.source;
+}else{
+document.getElementById("date").innerText = currentDate;
+document.getElementById("title").innerText = "আজকের জন্য কোনো পোস্ট নেই";
+document.getElementById("content").innerText = "অনুগ্রহ করে পরে আবার দেখুন।";
+document.getElementById("source").innerText = "";
+}
+
+})
+.catch(error=>{
+document.getElementById("title").innerText = "ডেটা লোড করা যায়নি";
+});
+</script>
+
+</body>
+</html>

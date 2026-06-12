@@ -1,140 +1,142 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noble Hadith</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>Noble Hadith</title>
+        body {
+            font-family: 'SolaimanLipi', Arial, sans-serif;
+            background: #f4f7f9;
+            padding: 20px;
+            color: #222;
+        }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
 
-body{
-font-family:SolaimanLipi, Arial, sans-serif;
-background:#f4f7f9;
-padding:20px;
-color:#222;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.container{
-max-width:800px;
-margin:auto;
-}
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #0f766e;
+        }
 
-.header{
-text-align:center;
-margin-bottom:20px;
-}
+        .subtitle {
+            color: #666;
+            margin-top: 5px;
+        }
 
-.logo{
-font-size:32px;
-font-weight:bold;
-color:#0f766e;
-}
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.08);
+        }
 
-.subtitle{
-color:#666;
-margin-top:5px;
-}
+        .date {
+            color: #0f766e;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-.card{
-background:#fff;
-padding:25px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-.date{
-color:#0f766e;
-font-weight:bold;
-margin-bottom:15px;
-}
+        .content {
+            font-size: 20px;
+            line-height: 1.9;
+            text-align: justify;
+        }
 
-.title{
-font-size:28px;
-font-weight:bold;
-margin-bottom:20px;
-}
+        .source {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            font-weight: bold;
+            color: #555;
+        }
 
-.content{
-font-size:20px;
-line-height:1.9;
-text-align:justify;
-}
-
-.source{
-margin-top:25px;
-padding-top:15px;
-border-top:1px solid #ddd;
-font-weight:bold;
-color:#555;
-}
-
-.footer{
-text-align:center;
-margin-top:25px;
-color:#777;
-font-size:14px;
-}
-</style>
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
+    <div class="header">
+        <div class="logo">Noble Hadith</div>
+        <div class="subtitle">দৈনিক ইসলামিক বার্তা</div>
+    </div>
 
-<div class="header">
-<div class="logo">Noble Hadith</div>
-<div class="subtitle">দৈনিক ইসলামিক বার্তা</div>
-</div>
+    <div class="card">
+        <div class="date" id="date">লোড হচ্ছে...</div>
+        <div class="title" id="title">লোড হচ্ছে...</div>
+        <div class="content" id="content">লোড হচ্ছে...</div>
+        <div class="source" id="source">লোড হচ্ছে...</div>
+    </div>
 
-<div class="card">
-<div class="date" id="date">লোড হচ্ছে...</div>
-<div class="title" id="title">লোড হচ্ছে...</div>
-<div class="content" id="content">লোড হচ্ছে...</div>
-<div class="source" id="source">লোড হচ্ছে...</div>
-</div>
-
-<div class="footer">
-© Noble Hadith
-</div>
-
+    <div class="footer">
+        &copy; Noble Hadith
+    </div>
 </div>
 
 <script>
-fetch("posts.json")
-.then(response => response.json())
-.then(posts => {
+    // posts.json ফাইল থেকে ডেটা ফেচ করা হচ্ছে
+    fetch("posts.json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("নেটওয়ার্ক রেসপন্স ঠিক নেই");
+            }
+            return response.json();
+        })
+        .then(posts => {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
 
-const today = new Date();
-const yyyy = today.getFullYear();
-const mm = String(today.getMonth()+1).padStart(2,'0');
-const dd = String(today.getDate()).padStart(2,'0');
+            const currentDate = `${yyyy}-${mm}-${dd}`;
+            const post = posts.find(item => item.date === currentDate);
 
-const currentDate = `${yyyy}-${mm}-${dd}`;
-
-const post = posts.find(item => item.date === currentDate);
-
-if(post){
-document.getElementById("date").innerText = "তারিখ: " + post.date;
-document.getElementById("title").innerText = post.title;
-document.getElementById("content").innerText = post.content;
-document.getElementById("source").innerText = "উৎস: " + post.source;
-}else{
-document.getElementById("date").innerText = currentDate;
-document.getElementById("title").innerText = "আজকের জন্য কোনো পোস্ট নেই";
-document.getElementById("content").innerText = "অনুগ্রহ করে পরে আবার দেখুন।";
-document.getElementById("source").innerText = "";
-}
-
-})
-.catch(error=>{
-document.getElementById("title").innerText = "ডেটা লোড করা যায়নি";
-});
+            if (post) {
+                document.getElementById("date").innerText = "তারিখ: " + post.date;
+                document.getElementById("title").innerText = post.title;
+                document.getElementById("content").innerText = post.content;
+                document.getElementById("source").innerText = "উৎস: " + post.source;
+            } else {
+                document.getElementById("date").innerText = currentDate;
+                document.getElementById("title").innerText = "আজকের জন্য কোনো পোস্ট নেই";
+                document.getElementById("content").innerText = "অনুগ্রহ করে পরে আবার দেখুন।";
+                document.getElementById("source").innerText = "";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("title").innerText = "ডেটা লোড করা যায়নি";
+            document.getElementById("content").innerText = "সার্ভার বা ফাইল লোড করতে সমস্যা হচ্ছে।";
+            document.getElementById("date").innerText = "";
+            document.getElementById("source").innerText = "";
+        });
 </script>
 
 </body>

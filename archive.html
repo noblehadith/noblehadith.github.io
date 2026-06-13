@@ -1,1 +1,38 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>আর্কাইভ | Noble Hadith</title>
+    <meta name="description" content="সব হাদিসের তালিকা – তারিখ অনুযায়ী">
+    <link rel="canonical" href="https://noblehadith.github.io/archive.html">
+    <style>
+        body{font-family:sans-serif;background:#f4f7f9;padding:20px}
+        .container{max-width:800px;margin:auto}
+        .card{background:#fff;padding:20px;border-radius:15px}
+        ul{list-style:none;padding:0}
+        li{margin:10px 0;border-bottom:1px solid #eee;padding:8px}
+        a{color:#0f766e;text-decoration:none;font-size:18px}
+        a:hover{text-decoration:underline}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>সকল হাদিসের আর্কাইভ</h1>
+        <ul id="archive-list">লোড হচ্ছে...</ul>
+        <p><a href="/">← হোমপেজে ফিরুন</a></p>
+    </div>
+</div>
+<script>
+    fetch('/posts.json')
+        .then(r=>r.json())
+        .then(posts=>{
+            const sorted = [...posts].sort((a,b)=>b.date.localeCompare(a.date));
+            const html = sorted.map(p=>`<li><a href="/date/${p.date}">📅 ${p.date} – ${p.title}</a></li>`).join('');
+            document.getElementById('archive-list').innerHTML = html || '<li>কোনো পোস্ট নেই</li>';
+        })
+        .catch(()=>document.getElementById('archive-list').innerHTML='<li>লোড করতে সমস্যা</li>');
+</script>
+</body>
+</html>

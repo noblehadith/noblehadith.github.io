@@ -2,8 +2,54 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noble Hadith</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Noble Hadith | দৈনিক হাদিস ও ইসলামিক বার্তা</title>
+    <meta name="title" content="Noble Hadith - দৈনিক হাদিস ও ইসলামিক বার্তা">
+    <meta name="description" content="প্রতিদিন একটি নির্ভরযোগ্য হাদিস ও ইসলামিক জ্ঞান লাভ করুন। Noble Hadith - কুরআন ও সুন্নাহ ভিত্তিক দৈনিক নির্দেশনা।">
+    <meta name="keywords" content="হাদিস, দৈনিক হাদিস, ইসলামিক বার্তা, noble hadith, হাদিস বাংলা, সহিহ হাদিস, ইসলামিক পোস্ট, daily hadith, bangla hadith">
+    <meta name="author" content="Noble Hadith">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="language" content="Bengali">
+    <meta name="revisit-after" content="1 day">
+    <meta name="distribution" content="global">
+    
+    <!-- Canonical URL (adjust domain if known, using relative for now) -->
+    <link rel="canonical" href="https://www.noblehadith.com/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.noblehadith.com/">
+    <meta property="og:title" content="Noble Hadith - দৈনিক হাদিস ও ইসলামিক বার্তা">
+    <meta property="og:description" content="প্রতিদিন একটি নির্ভরযোগ্য হাদিস ও ইসলামিক জ্ঞান লাভ করুন। কুরআন ও সুন্নাহ ভিত্তিক দৈনিক নির্দেশনা।">
+    <meta property="og:image" content="https://www.noblehadith.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Noble Hadith - দৈনিক হাদিস">
+    <meta property="og:site_name" content="Noble Hadith">
+    <meta property="og:locale" content="bn_BD">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.noblehadith.com/">
+    <meta name="twitter:title" content="Noble Hadith - দৈনিক হাদিস ও ইসলামিক বার্তা">
+    <meta name="twitter:description" content="প্রতিদিন একটি নির্ভরযোগ্য হাদিস ও ইসলামিক জ্ঞান লাভ করুন।">
+    <meta name="twitter:image" content="https://www.noblehadith.com/og-image.jpg">
+    <meta name="twitter:site" content="@noblehadith">
+    <meta name="twitter:creator" content="@noblehadith">
+    
+    <!-- Additional SEO & Mobile -->
+    <meta name="theme-color" content="#0f766e">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Noble Hadith">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- Favicon (placeholder - replace with actual path if available) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
     <style>
         * {
             margin: 0;
@@ -78,6 +124,21 @@
             color: #777;
             font-size: 14px;
         }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+            .card {
+                padding: 18px;
+            }
+            .title {
+                font-size: 24px;
+            }
+            .content {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -123,11 +184,18 @@
                 document.getElementById("title").innerText = post.title;
                 document.getElementById("content").innerText = post.content;
                 document.getElementById("source").innerText = "উৎস: " + post.source;
+                
+                // Dynamic meta update for better SEO (optional)
+                document.querySelector('meta[name="description"]')?.setAttribute("content", post.content.substring(0, 160) + " - Noble Hadith");
+                document.querySelector('meta[property="og:description"]')?.setAttribute("content", post.content.substring(0, 160));
+                document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", post.content.substring(0, 160));
+                document.title = post.title + " | Noble Hadith";
             } else {
                 document.getElementById("date").innerText = currentDate;
                 document.getElementById("title").innerText = "আজকের জন্য কোনো পোস্ট নেই";
                 document.getElementById("content").innerText = "অনুগ্রহ করে পরে আবার দেখুন।";
                 document.getElementById("source").innerText = "";
+                document.title = "আজকের হাদিস নেই | Noble Hadith";
             }
         })
         .catch(error => {
@@ -136,6 +204,7 @@
             document.getElementById("content").innerText = "সার্ভার বা ফাইল লোড করতে সমস্যা হচ্ছে।";
             document.getElementById("date").innerText = "";
             document.getElementById("source").innerText = "";
+            document.title = "সার্ভার সমস্যা | Noble Hadith";
         });
 </script>
 
